@@ -2,7 +2,9 @@ import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:ticked_booking_app/screens/hotel_screen.dart';
 import 'package:ticked_booking_app/screens/ticked_view.dart';
+import 'package:ticked_booking_app/utils/app_info_list.dart';
 import 'package:ticked_booking_app/utils/app_styles.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -100,7 +102,63 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           const Gap(15),
-          TickedView(),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: Row(
+                // children: [
+                //   TickedView(),
+                //   TickedView(),
+                //   TickedView(),
+                //
+                // ],
+                children: ticketList.map((singleTicket) => TickedView(ticket: singleTicket)).toList(),
+              ),
+            ),
+          ),
+          const Gap(15),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Hotels",
+                  style: Styles.headLineStyle2,
+                ),
+                InkWell(
+                  onTap: (){
+                    print("you are tapped");
+                  },
+                  child: Text(
+                    "View all",
+                    style:
+                    Styles.textStyle.copyWith(color: Styles.primaryColor),
+                  ),
+                )
+              ],
+            ),
+          ),
+          const Gap(15),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+              padding: EdgeInsets.only(left: 20),
+              child: Row(
+                // children: [
+                //   HotelScreen(),
+                //   HotelScreen(),
+                //   HotelScreen(),
+                //   HotelScreen(),
+                //   HotelScreen(),
+                //   HotelScreen(),
+                // ],
+                children: hotelList.map((singleHotel) => HotelScreen(hotel: singleHotel)).toList(),
+              )
+          ),
+
+
+          // TickedView(),
 
         ],
       ),
