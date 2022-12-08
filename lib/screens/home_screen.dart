@@ -6,6 +6,7 @@ import 'package:ticked_booking_app/screens/hotel_screen.dart';
 import 'package:ticked_booking_app/screens/ticked_view.dart';
 import 'package:ticked_booking_app/utils/app_info_list.dart';
 import 'package:ticked_booking_app/utils/app_styles.dart';
+import 'package:ticked_booking_app/widgets/double_text_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -79,25 +80,8 @@ class HomeScreen extends StatelessWidget {
                 ),
                 /* Upcoming Flights */
                 const Gap(40),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Upcoming Flights",
-                      style: Styles.headLineStyle2,
-                    ),
-                    InkWell(
-                      onTap: (){
-                        print("you are tapped");
-                      },
-                      child: Text(
-                        "View all",
-                        style:
-                            Styles.textStyle.copyWith(color: Styles.primaryColor),
-                      ),
-                    )
-                  ],
-                )
+                AppDoubleTextWidget(bigText: "Upcoming Flights", smallText: "View all"),
+
               ],
             ),
           ),
@@ -105,7 +89,7 @@ class HomeScreen extends StatelessWidget {
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Padding(
-              padding: const EdgeInsets.only(right: 20),
+              padding: const EdgeInsets.only(left: 20),
               child: Row(
                 // children: [
                 //   TickedView(),
@@ -120,25 +104,7 @@ class HomeScreen extends StatelessWidget {
           const Gap(15),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Hotels",
-                  style: Styles.headLineStyle2,
-                ),
-                InkWell(
-                  onTap: (){
-                    print("you are tapped");
-                  },
-                  child: Text(
-                    "View all",
-                    style:
-                    Styles.textStyle.copyWith(color: Styles.primaryColor),
-                  ),
-                )
-              ],
-            ),
+            child: AppDoubleTextWidget(bigText: "Hotels", smallText: "View all"),
           ),
           const Gap(15),
           SingleChildScrollView(
@@ -149,17 +115,11 @@ class HomeScreen extends StatelessWidget {
                 //   HotelScreen(),
                 //   HotelScreen(),
                 //   HotelScreen(),
-                //   HotelScreen(),
-                //   HotelScreen(),
-                //   HotelScreen(),
                 // ],
                 children: hotelList.map((singleHotel) => HotelScreen(hotel: singleHotel)).toList(),
               )
           ),
-
-
           // TickedView(),
-
         ],
       ),
     );

@@ -15,23 +15,23 @@ class TickedView extends StatelessWidget {
     return SizedBox(
       // width: MediaQuery.of(context).size.width,
       // width: size.width,
-      width: size.width *0.85,
-      height: 200,
+      width: size.width * 0.85,
+      height: AppLayout.getHeight(200),
       child: Container(
-        margin: const EdgeInsets.only(left: 16),
+        margin:  EdgeInsets.only(right: AppLayout.getHeight(16) ),
         child: Column(
           children: [
             /*
             showing the blue part of the card/ticked
             * */
             Container(
-              decoration: const BoxDecoration(
+              decoration:  BoxDecoration(
                   color: Color(0xFF526799),
                   borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(21),
-                      topRight: Radius.circular(21))),
+                      topLeft: Radius.circular(AppLayout.getHeight(21)),
+                      topRight: Radius.circular(AppLayout.getHeight(21)))),
               // color: Colors.red,
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(AppLayout.getHeight(16)),
               child: Column(
                 children: [
                   Row(
@@ -50,7 +50,7 @@ class TickedView extends StatelessWidget {
                           child: Stack(
                         children: [
                           SizedBox(
-                            height: 24,
+                            height: AppLayout.getHeight(24),
                             child: LayoutBuilder(
                               builder: (BuildContext context,
                                   BoxConstraints constrains) {
@@ -96,7 +96,7 @@ class TickedView extends StatelessWidget {
                       const ThickContainer(),
                       Expanded(child: Container()),
                       Text(
-                          ticket['to']['code'],
+                        ticket['to']['code'],
                         style:
                             Styles.headLineStyle3.copyWith(color: Colors.white),
                       )
@@ -107,20 +107,20 @@ class TickedView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                          width: 100,
+                          width: AppLayout.getWidth(100),
                           child: Text(
-    ticket['from']['name'],
+                            ticket['from']['name'],
                             style: Styles.headLineStyle4.copyWith(
                               color: Colors.white,
                             ),
                           )),
                       Text(
-                        "8h30",
+                        ticket['departure_time'],
                         style:
                             Styles.headLineStyle3.copyWith(color: Colors.white),
                       ),
                       SizedBox(
-                          width: 100,
+                          width: AppLayout.getWidth(100),
                           child: Text(
                             ticket['to']['name'],
                             textAlign: TextAlign.end,
@@ -142,10 +142,10 @@ class TickedView extends StatelessWidget {
               color: Styles.orangeColor,
               child: Row(
                 children: [
-                  const SizedBox(
-                      height: 20,
-                      width: 10,
-                      child: DecoratedBox(
+                   SizedBox(
+                      height: AppLayout.getHeight(20),
+                      width: AppLayout.getWidth(10),
+                      child:  DecoratedBox(
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.only(
@@ -181,13 +181,14 @@ class TickedView extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               mainAxisSize: MainAxisSize.max,
                               children: List.generate(
-                                  (BoxConstraints.constrainWidth()/15).floor(),
+                                  (BoxConstraints.constrainWidth() / 15)
+                                      .floor(),
                                   (index) => const SizedBox(
                                         width: 5,
                                         height: 1,
                                         child: DecoratedBox(
-                                          decoration:
-                                              BoxDecoration(color: Colors.white),
+                                          decoration: BoxDecoration(
+                                              color: Colors.white),
                                         ),
                                       )));
                         },
@@ -212,13 +213,14 @@ class TickedView extends StatelessWidget {
             * Bottom part
             * */
             Container(
-              decoration:  BoxDecoration(
+              decoration: BoxDecoration(
                   color: Styles.orangeColor,
                   borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(21),
                       bottomRight: Radius.circular(21))),
               // color: Colors.red,
-              padding: const EdgeInsets.only(left: 16,top: 10,right: 16, bottom: 16),
+              padding: const EdgeInsets.only(
+                  left: 16, top: 10, right: 16, bottom: 16),
               child: Column(
                 children: [
                   Row(
@@ -227,28 +229,49 @@ class TickedView extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("1 May", style: Styles.headLineStyle3.copyWith(color: Colors.white),),
+                          Text(
+                            ticket['date'],
+                            style: Styles.headLineStyle3
+                                .copyWith(color: Colors.white),
+                          ),
                           const Gap(5),
-                          Text("Date",
-                          style: Styles.headLineStyle4.copyWith(color: Colors.white),),
+                          Text(
+                            'Date',
+                            style: Styles.headLineStyle4
+                                .copyWith(color: Colors.white),
+                          ),
                         ],
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text("08:00", style: Styles.headLineStyle3.copyWith(color: Colors.white),),
+                          Text(
+                            ticket['departure_time'],
+                            style: Styles.headLineStyle3
+                                .copyWith(color: Colors.white),
+                          ),
                           const Gap(5),
-                          Text("Time",
-                            style: Styles.headLineStyle4.copyWith(color: Colors.white),),
+                          Text(
+                            "Departure time",
+                            style: Styles.headLineStyle4
+                                .copyWith(color: Colors.white),
+                          ),
                         ],
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text("1 May", style: Styles.headLineStyle3.copyWith(color: Colors.white),),
+                          Text(
+                            ticket['number'].toString(),
+                            style: Styles.headLineStyle3
+                                .copyWith(color: Colors.white),
+                          ),
                           const Gap(5),
-                          Text("Date",
-                            style: Styles.headLineStyle4.copyWith(color: Colors.white),),
+                          Text(
+                            "Number",
+                            style: Styles.headLineStyle4
+                                .copyWith(color: Colors.white),
+                          ),
                         ],
                       )
                     ],
