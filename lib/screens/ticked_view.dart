@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:ticked_booking_app/utils/app_layout.dart';
@@ -18,15 +17,15 @@ class TickedView extends StatelessWidget {
       width: size.width * 0.85,
       height: AppLayout.getHeight(200),
       child: Container(
-        margin:  EdgeInsets.only(right: AppLayout.getHeight(16) ),
+        margin: EdgeInsets.only(right: AppLayout.getHeight(16)),
         child: Column(
           children: [
             /*
             showing the blue part of the card/ticked
             * */
             Container(
-              decoration:  BoxDecoration(
-                  color: Color(0xFF526799),
+              decoration: BoxDecoration(
+                  color: const Color(0xFF526799),
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(AppLayout.getHeight(21)),
                       topRight: Radius.circular(AppLayout.getHeight(21)))),
@@ -142,10 +141,10 @@ class TickedView extends StatelessWidget {
               color: Styles.orangeColor,
               child: Row(
                 children: [
-                   SizedBox(
+                  SizedBox(
                       height: AppLayout.getHeight(20),
                       width: AppLayout.getWidth(10),
-                      child:  DecoratedBox(
+                      child: const DecoratedBox(
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.only(
@@ -175,14 +174,14 @@ class TickedView extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: LayoutBuilder(
-                        builder: (BuildContext, BoxConstraints) {
+                        builder:
+                            (BuildContext context, BoxConstraints constrains) {
                           return Flex(
                               direction: Axis.horizontal,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               mainAxisSize: MainAxisSize.max,
                               children: List.generate(
-                                  (BoxConstraints.constrainWidth() / 15)
-                                      .floor(),
+                                  (constrains.constrainWidth() / 15).floor(),
                                   (index) => const SizedBox(
                                         width: 5,
                                         height: 1,
