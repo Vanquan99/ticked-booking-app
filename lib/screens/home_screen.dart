@@ -1,5 +1,4 @@
 import 'package:fluentui_icons/fluentui_icons.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:ticked_booking_app/screens/hotel_screen.dart';
@@ -80,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 /* Upcoming Flights */
                 const Gap(40),
-                AppDoubleTextWidget(bigText: "Upcoming Flights", smallText: "View all"),
+                const AppDoubleTextWidget(bigText: "Upcoming Flights", smallText: "View all"),
 
               ],
             ),
@@ -103,13 +102,13 @@ class HomeScreen extends StatelessWidget {
           ),
           const Gap(15),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: AppDoubleTextWidget(bigText: "Hotels", smallText: "View all"),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: const AppDoubleTextWidget(bigText: "Hotels", smallText: "View all"),
           ),
           const Gap(15),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.only(left: 20),
+              padding: const EdgeInsets.only(left: 20),
               child: Row(
                 // children: [
                 //   HotelScreen(),
