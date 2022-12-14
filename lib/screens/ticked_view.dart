@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get_utils/src/platform/platform.dart';
 import 'package:ticked_booking_app/utils/app_layout.dart';
 import 'package:ticked_booking_app/utils/app_styles.dart';
+import 'package:ticked_booking_app/widgets/column_layout.dart';
+import 'package:ticked_booking_app/widgets/layout_builder_widget.dart';
 import 'package:ticked_booking_app/widgets/thick_container.dart';
 
 class TickedView extends StatelessWidget {
   final Map<String, dynamic> ticket;
-  const TickedView({Key? key, required this.ticket}) : super(key: key);
+  final bool? isColor;
+  const TickedView({Key? key, required this.ticket, this.isColor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +19,7 @@ class TickedView extends StatelessWidget {
       // width: MediaQuery.of(context).size.width,
       // width: size.width,
       width: size.width * 0.85,
-      height: AppLayout.getHeight(200),
+      height: AppLayout.getHeight(GetPlatform.isAndroid==true?167:169),
       child: Container(
         margin: EdgeInsets.only(right: AppLayout.getHeight(16)),
         child: Column(
@@ -25,7 +29,7 @@ class TickedView extends StatelessWidget {
             * */
             Container(
               decoration: BoxDecoration(
-                  color: const Color(0xFF526799),
+                  color: isColor==null ? Color(0xFF526799) : Colors.white,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(AppLayout.getHeight(21)),
                       topRight: Radius.circular(AppLayout.getHeight(21)))),
@@ -38,70 +42,40 @@ class TickedView extends StatelessWidget {
                       Text(
                         // "NYC",
                         ticket['from']['code'],
-                        style:
-                            Styles.headLineStyle3.copyWith(color: Colors.white),
+                        style: isColor == null?
+                            Styles.headLineStyle3.copyWith(color: Colors.white): Styles.headLineStyle3,
                       ),
                       // const Spacer(), // gian cach 2 dau
                       Expanded(child: Container()),
-                      const ThickContainer(),
-
+                      const ThickContainer(isColor:true),
                       Expanded(
                           child: Stack(
                         children: [
                           SizedBox(
                             height: AppLayout.getHeight(24),
-                            child: LayoutBuilder(
-                              builder: (BuildContext context,
-                                  BoxConstraints constrains) {
-                                print(
-                                    "The width is ${constrains.constrainWidth()}");
-                                return Flex(
-                                  direction: Axis.horizontal,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: List.generate(
-                                      (constrains.constrainWidth() / 6).floor(),
-                                      (index) => const SizedBox(
-                                            width: 3,
-                                            height: 1,
-                                            child: DecoratedBox(
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          )),
-                                );
-                              },
-                              // child: Flex(
-                              //   direction: Axis.horizontal,
-                              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              //   children:
-                              //     List.generate(5, (index) => Text("-")),
-                            ),
+                            child: AppLayoutBuiderWidget(sections: 6),
                           ),
                           Center(
                             child: Transform.rotate(
                               angle: 1.5,
-                              child: const Icon(
+                              child: Icon(
                                 Icons.local_airport_rounded,
-                                color: Colors.white,
+                                color: isColor==null? Colors.white:Color(0xFF8ACCF7),
                               ),
                             ),
                           ),
                         ],
                       )),
-
-                      const ThickContainer(),
+                      const ThickContainer(isColor:true),
                       Expanded(child: Container()),
                       Text(
                         ticket['to']['code'],
-                        style:
-                            Styles.headLineStyle3.copyWith(color: Colors.white),
+                        style: isColor==null?
+                            Styles.headLineStyle3.copyWith(color: Colors.white): Styles.headLineStyle3,
                       )
                     ],
                   ),
-                  const Gap(1),
+                  const Gap(3),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -109,23 +83,23 @@ class TickedView extends StatelessWidget {
                           width: AppLayout.getWidth(100),
                           child: Text(
                             ticket['from']['name'],
-                            style: Styles.headLineStyle4.copyWith(
+                            style: isColor==null? Styles.headLineStyle4.copyWith(
                               color: Colors.white,
-                            ),
+                            ):Styles.headLineStyle4,
                           )),
                       Text(
-                        ticket['departure_time'],
-                        style:
-                            Styles.headLineStyle3.copyWith(color: Colors.white),
+                        ticket['flying_time'],
+                        style: isColor==null?
+                            Styles.headLineStyle4.copyWith(color: Colors.white): Styles.headLineStyle4,
                       ),
                       SizedBox(
                           width: AppLayout.getWidth(100),
                           child: Text(
                             ticket['to']['name'],
                             textAlign: TextAlign.end,
-                            style: Styles.headLineStyle4.copyWith(
+                            style: isColor==null? Styles.headLineStyle4.copyWith(
                               color: Colors.white,
-                            ),
+                            ): Styles.headLineStyle4,
                           )),
                     ],
                   ),
@@ -138,16 +112,16 @@ class TickedView extends StatelessWidget {
 
             Container(
               // color: const Color(0xFFF37B67),
-              color: Styles.orangeColor,
+              color: isColor==null?Styles.orangeColor:Colors.white,
               child: Row(
                 children: [
                   SizedBox(
                       height: AppLayout.getHeight(20),
                       width: AppLayout.getWidth(10),
-                      child: const DecoratedBox(
+                      child:  DecoratedBox(
                           decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
+                              color: isColor==null?Colors.grey.shade200:Colors.white,
+                              borderRadius: const BorderRadius.only(
                                 topRight: Radius.circular(10),
                                 bottomRight: Radius.circular(10),
                               )))),
@@ -182,25 +156,25 @@ class TickedView extends StatelessWidget {
                               mainAxisSize: MainAxisSize.max,
                               children: List.generate(
                                   (constrains.constrainWidth() / 15).floor(),
-                                  (index) => const SizedBox(
+                                  (index) =>  SizedBox(
                                         width: 5,
                                         height: 1,
                                         child: DecoratedBox(
                                           decoration: BoxDecoration(
-                                              color: Colors.white),
+                                              color: isColor==null?Colors.white: Colors.grey.shade300),
                                         ),
                                       )));
                         },
                       ),
                     ),
                   ),
-                  const SizedBox(
+                   SizedBox(
                       height: 20,
                       width: 10,
                       child: DecoratedBox(
                           decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
+                              color: isColor==null?Colors.grey.shade200:Colors.white,
+                              borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(10),
                                 bottomLeft: Radius.circular(10),
                               )))),
@@ -213,10 +187,10 @@ class TickedView extends StatelessWidget {
             * */
             Container(
               decoration: BoxDecoration(
-                  color: Styles.orangeColor,
-                  borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(21),
-                      bottomRight: Radius.circular(21))),
+                  color: isColor==null? Styles.orangeColor:Colors.white,
+                  borderRadius:  BorderRadius.only(
+                      bottomLeft: Radius.circular(isColor==null?21:0),
+                      bottomRight: Radius.circular(isColor==null?21:0))),
               // color: Colors.red,
               padding: const EdgeInsets.only(
                   left: 16, top: 10, right: 16, bottom: 16),
@@ -225,54 +199,25 @@ class TickedView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            ticket['date'],
-                            style: Styles.headLineStyle3
-                                .copyWith(color: Colors.white),
-                          ),
-                          const Gap(5),
-                          Text(
-                            'Date',
-                            style: Styles.headLineStyle4
-                                .copyWith(color: Colors.white),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            ticket['departure_time'],
-                            style: Styles.headLineStyle3
-                                .copyWith(color: Colors.white),
-                          ),
-                          const Gap(5),
-                          Text(
-                            "Departure time",
-                            style: Styles.headLineStyle4
-                                .copyWith(color: Colors.white),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            ticket['number'].toString(),
-                            style: Styles.headLineStyle3
-                                .copyWith(color: Colors.white),
-                          ),
-                          const Gap(5),
-                          Text(
-                            "Number",
-                            style: Styles.headLineStyle4
-                                .copyWith(color: Colors.white),
-                          ),
-                        ],
-                      )
+                      AppColumnLayout(firstText: ticket['date'], secondText: 'Date', alignment: CrossAxisAlignment.start, isColor: isColor),
+                      // Column(
+                      //   crossAxisAlignment: CrossAxisAlignment.start,
+                      //   children: [
+                      //     Text(
+                      //       ticket['date'],
+                      //       style: isColor==null?Styles.headLineStyle3
+                      //           .copyWith(color: Colors.white):Styles.headLineStyle3,
+                      //     ),
+                      //     const Gap(5),
+                      //     Text(
+                      //       'Date',
+                      //       style: isColor==null?Styles.headLineStyle4
+                      //           .copyWith(color: Colors.white): Styles.headLineStyle4,
+                      //     ),
+                      //   ],
+                      // ),
+                      AppColumnLayout(firstText: ticket['departure_time'], secondText: "Departure time", alignment: CrossAxisAlignment.center, isColor: isColor),
+                      AppColumnLayout(firstText: ticket['number'].toString(), secondText: "Number", alignment: CrossAxisAlignment.end, isColor: isColor),
                     ],
                   )
                 ],
